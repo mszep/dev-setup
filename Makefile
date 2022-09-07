@@ -39,13 +39,15 @@ pandoc_args += --highlight-style tango
 static_files := $(shell find -L lit -type f -not -name '*.md')
 static_targets := $(static_files:lit/%=docs/%)
 
-.PHONY: site dockerfile clean watch watch-pandoc watch-browser-sync
+.PHONY: site dockerfile gh-action clean watch watch-pandoc watch-browser-sync
 
 # This should build everything needed to generate your web site. That includes
 # possible Javascript targets that may need compiling.
 site: docs/index.html docs/css/mods.css $(static_targets)
 
 dockerfile: src/Dockerfile
+
+gh-action: .github/workflows/docker_build.yml
 
 clean:
 	rm -rf docs src
@@ -63,6 +65,7 @@ watch-src:
 	@while true; do \
 		inotifywait -e close_write lit Makefile; \
 		make dockerfile; \
+		make gh-action; \
 	done
 
 watch-pandoc:
@@ -84,6 +87,9 @@ docs/css/mods.css: bootstrap/mods.css
 
 src/Dockerfile: $(input_files) Makefile
 	@mkdir -p src
+
+.github/workflows/docker_build.yml: $(input_files) Makefile
+	@mkdir -p .github/workflows
 
 $(static_targets): docs/%: lit/%
 	@mkdir -p $(dir $@)
