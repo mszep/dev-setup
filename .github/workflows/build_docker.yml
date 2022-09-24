@@ -32,6 +32,7 @@ jobs:
           make dockerfile
           echo $PWD
           ls
+          ls src/
           mv src/Dockerfile $HOME
 
       - name: Log in to the Container registry
