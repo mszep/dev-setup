@@ -31,7 +31,7 @@ jobs:
         run: |
           make dockerfile
           echo $PWD
-          ls
+          ls -al
           ls src/
           mv src/Dockerfile $HOME
 

@@ -45,7 +45,7 @@ static_targets := $(static_files:lit/%=docs/%)
 # possible Javascript targets that may need compiling.
 site: docs/index.html docs/css/mods.css $(static_targets)
 
-dockerfile: src/Dockerfile
+dockerfile: srcdir src/Dockerfile
 
 clean:
 	rm -rf docs src
@@ -62,7 +62,7 @@ watch:
 watch-src:
 	@while true; do \
 		inotifywait -e close_write lit Makefile; \
-		make dockerfile; \
+		make srcdir; \
 	done
 
 watch-pandoc:
@@ -83,7 +83,11 @@ docs/css/mods.css: bootstrap/mods.css
 	cp $< $@
 
 src/Dockerfile: $(input_files) Makefile
+	entangled tangle -a
+
+srcdir: $(input_files) Makefile
 	@mkdir -p src
+
 
 $(static_targets): docs/%: lit/%
 	@mkdir -p $(dir $@)
