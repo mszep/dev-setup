@@ -22,8 +22,8 @@ jobs:
       - name: Checkout repository
         uses: actions/checkout@v3
         with:
-          name: entangled/entangled
-          refs: 8f6ad5a3e3e73171253aa66fea3d54091cb55e06
+          repository: entangled/entangled
+          ref: 8f6ad5a3e3e73171253aa66fea3d54091cb55e06
           submodules: recursive
 
       - name: Log in to the Container registry
