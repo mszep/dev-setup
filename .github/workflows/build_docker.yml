@@ -30,10 +30,8 @@ jobs:
 
       - name: Generate Dockerfile
         run: |
-          make dockerfile
-          echo $PWD
-          ls -al
-          ls src/
+          mkdir src
+          entangled tangle -a
           mv src/Dockerfile $HOME
 
       - name: Log in to the Container registry
