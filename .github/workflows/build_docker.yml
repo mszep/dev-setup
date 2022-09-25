@@ -19,6 +19,7 @@ env:
 jobs:
   build-and-push-image:
     runs-on: ubuntu-latest
+    container: nlesc/entangled:latest
     permissions:
       contents: read
       packages: write
