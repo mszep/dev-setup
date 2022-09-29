@@ -9,7 +9,7 @@ on:
 
 env:
   REGISTRY: ghcr.io
-  IMAGE_NAME: entangled
+  IMAGE_NAME: mszep-entangled
 
 jobs:
   build-and-push-entangled-image:
