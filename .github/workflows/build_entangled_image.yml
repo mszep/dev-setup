@@ -7,7 +7,10 @@ name: Create and publish a Docker image for entangled
 on:
   workflow_dispatch:
     inputs:
-      logLevel: info
+      logLevel:
+        description: 'Log level'
+        required: true
+        default: 'info'
 
 env:
   REGISTRY: ghcr.io
